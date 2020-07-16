@@ -7,7 +7,7 @@ después de escribir en cada uno de los campos y cuando se envíe el formulario.
 -->
 
 <template>
-  <form novalidate class="md-layout" @submit.prevent.stop="onSubmit">
+  <form novalidate class="login" @submit.prevent.stop="onSubmit">
       <md-card class="md-layout-item md-size-50 md-small-size-100">
         <md-card-header>
           <div class="md-title">Login</div>
@@ -17,13 +17,13 @@ después de escribir en cada uno de los campos y cuando se envíe el formulario.
 
           <md-field >
             <label for="emailID">Email</label>
-            <md-input id="emailID" type="email" name="email" @blur="validateEmail"  autocomplete="email" v-model="form.email" :disabled="sending" />
+            <md-input id="emailID" type="email" name="email" @blur="validateEmail"  autocomplete="email" v-model="email"  />
             <p role="alert" v-if="emailError">{{emailError}}</p>
           </md-field>
 
           <md-field >
             <label for="passwordID">Password</label>
-            <md-input id="passwordID" name="password" @blur="validatePassword" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />
+            <md-input id="passwordID" name="password" @blur="validatePassword" autocomplete="family-name" v-model="password"  />
             <p role="alert" v-if="passwordError">{{passwordError}}</p>
           </md-field>
 
@@ -43,11 +43,11 @@ después de escribir en cada uno de los campos y cuando se envíe el formulario.
 
 /* eslint-disable no-debugger */
 
-import uuid from 'uuid';
+import {v4} from 'uuid';
 
 const isEmail = (value) => {
 
-  const isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
+  const isValidEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
   return isValidEmail ? '' : 'Formato de email incorrecto';
 
 }
@@ -65,10 +65,10 @@ export default {
     name : "Formulario",
     data(){
       return {
-            emailID : uuid.v4(),
+            emailID : v4(),
             email : '',
             password : '',
-            passwordID : uuid.v4(),
+            passwordID : v4(),
             emailerror : '',
             passwordError : ''
 
@@ -100,6 +100,11 @@ export default {
 </script>
 
 <style scoped>
+  .login{
+    margin: auto;
+    width: 60%;
+  }
+  
 </style>
 
 

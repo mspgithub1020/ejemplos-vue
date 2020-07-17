@@ -1,9 +1,10 @@
+import Vuex, {createLogger} from 'vuex';
 import Vue from 'vue';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    
+    plugins: [createLogger()],
     state: {
         email: '',
         password: ''
@@ -12,20 +13,19 @@ const store = new Vuex.Store({
         
     },
     mutations: {
-        updateEmail(e){
-            state.email = e.target.value;
+        updateEmail(state, value){
+            state.email = value;
         },
-        updatePassword(e){
-            state.password = e.target.value;
-        },
-        
+        updatePassword(state, value){
+            state.password = value;
+        },        
     },
     actions: {
-        updateEmail(context){
-            context.commit('updateEmail');
+        updateEmail(context, value){
+            context.commit('updateEmail' , value);
         },
-        updatePassword(context){
-            context.commit('updatePassword');
+        updatePassword(context, value){
+            context.commit('updatePassword' , value);
         }
     }
 })

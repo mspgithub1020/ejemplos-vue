@@ -8,14 +8,14 @@
         <md-card-content>
 
           <md-field >
-            <label for="emailID">Email</label>
-            <md-input id="emailID" type="email" name="email" v-model="email"  />
+            <label :for="emailID">Email</label>
+            <md-input :id="emailID" type="email" name="email" :value="email" @input="updateEmail($event.target.value)"  />
             
           </md-field>
 
           <md-field >
-            <label for="passwordID">Password</label>
-            <md-input id="passwordID" name="password" v-model="password"  />
+            <label :for="passwordID">Password</label>
+            <md-input :id="passwordID" name="password" :value="password" @input="updatePassword($event.target.value)"  />
             
           </md-field>
 
@@ -41,27 +41,21 @@ export default {
     name : "LoginVuex",
     data(){
         return {
-            emailID : v4(),
-            email : '',
-            password : '',
+            emailID : v4(),            
             passwordID : v4()
         }
     },
     computed: {
         ...mapState(['email','password'])
     },
-    methods: {
-        
+    methods: {        
         ...mapActions(['updateEmail','updatePassword']),
 
         onSubmit(){            
             console.log({email:this.email, password: this.password})
             
         },
-      
-
     }
-
 };
 </script>
 
